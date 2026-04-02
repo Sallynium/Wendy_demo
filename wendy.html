@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Claude 工作運用教學 - 一隅數位 Corner Digit</title>
+    <style>
+        /* 雙子座 PM 挑選的木質米色調 UI */
+        :root {
+            --bg-color: #F5F5F0; /* 淺米色底 */
+            --primary-blue: #2C3E50; /* 專業深藍 [cite: 13] */
+            --wood-brown: #8B5A2B; /* 木質棕 */
+            --text-color: #333;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: "Microsoft JhengHei", sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 0;
+            border-bottom: 2px solid var(--wood-brown);
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            color: var(--primary-blue);
+            margin: 0;
+            font-size: 24px;
+            letter-spacing: 2px;
+        }
+
+        .company-name {
+            font-size: 14px;
+            color: var(--wood-brown);
+            font-weight: bold;
+        }
+
+        /* 比較表格樣式 */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--white);
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        th {
+            background-color: var(--primary-blue);
+            color: white;
+        }
+
+        .highlight-sonnet { color: #4b8bf5; font-weight: bold; }
+        .highlight-opus { color: #7c4dff; font-weight: bold; }
+
+        /* 切換按鈕樣式 */
+        .tab-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .tab-btn {
+            padding: 12px 25px;
+            border: 2px solid var(--wood-brown);
+            background: transparent;
+            color: var(--wood-brown);
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.3s;
+            border-radius: 4px;
+        }
+
+        .tab-btn.active {
+            background: var(--wood-brown);
+            color: white;
+        }
+
+        /* 簡報顯示區域 */
+        .viewer-box {
+            width: 100%;
+            height: 600px;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            font-size: 12px;
+            color: #999;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <div class="company-name">一隅數位有限公司 Corner Digit Ltd.</div>
+        <h1>Claude 如何運用於工作上：效能實測報告</h1>
+    </header>
+
+    <section>
+        <h3>📊 效能對比：Sonnet vs. Opus</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>比較項目</th>
+                    <th>Claude 3.5 Sonnet</th>
+                    <th>Claude 3 Opus</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>核心任務</strong></td>
+                    <td>用空白母片重建範例簡報</td>
+                    <td>保留格式並生成 Odoo 介紹</td>
+                </tr>
+                <tr>
+                    <td><strong>執行耗時</strong></td>
+                    <td class="highlight-sonnet">14:41</td>
+                    <td class="highlight-opus">16:12</td>
+                </tr>
+                <tr>
+                    <td><strong>呈現重點</strong></td>
+                    <td>結構複製與排版準確度</td>
+                    <td>業務邏輯深度與格式相容性</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <div class="tab-container">
+        <button class="tab-btn active" onclick="switchPPT('sonnet', this)">查看 Sonnet 結果</button>
+        <button class="tab-btn" onclick="switchPPT('opus', this)">查看 Opus 結果 (Odoo)</button>
+    </div>
+
+    <div class="viewer-box">
+        <iframe id="ppt-viewer" src="https://docs.google.com/viewer?url=YOUR_SONNET_FILE_URL&embedded=true"></iframe>
+    </div>
+
+    <footer>
+        &copy; 2026 一隅數位有限公司 | Powered by Gemini PM & 惟如 Web Engineer [cite: 1, 4]
+    </footer>
+</div>
+
+<script>
+function switchPPT(type, btn) {
+    const viewer = document.getElementById('ppt-viewer');
+    const buttons = document.querySelectorAll('.tab-btn');
+
+    buttons.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    // 修改點：將 /view 改為 /preview 才能在 iframe 顯示
+    if (type === 'sonnet') {
+        viewer.src = "https://drive.google.com/file/d/1cQ1e1EYZnt_qid_nz8-T6vgVMYP38sfM/preview";
+    } else {
+        viewer.src = "https://drive.google.com/file/d/13j5SXzga_F72Uzhm9WYYVeG9BNs0md3n/preview";
+    }
+}
+</script>
+
+</body>
+</html>
